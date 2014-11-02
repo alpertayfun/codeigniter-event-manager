@@ -1,4 +1,4 @@
 codeigniter-event-manager
 =========================
 
-Event Maneger for CodeIgniter 2.*
+<strong>Event Maneger for CodeIgniter 2.*</strong>
