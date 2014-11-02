@@ -40,6 +40,9 @@
 // kütüphanemizi dahil ediyoruz.
 require_once('register.class.php');
 
+// Tanımlanan event'ler
+require_once('defined.php');
+
 class Events {
 	public static function __callStatic($name, $arguments)
     {
@@ -48,8 +51,11 @@ class Events {
     	
 		// Magic methoda gelen istekleri kontrol ediyoruz.
 		if($name == 'add' || $name == 'fire'){
+			$argument1 = isset($arguments[0]) ? $arguments[0] : false;
+			$argument2 = isset($arguments[1]) ? $arguments[1] : null;
+			
 			// Gelen isteği register class'sımıza gönderiyoruz
-    		Register::$name($arguments[0], $arguments[1]);
+    		return Register::$name($argument1, $argument2);
 		}
 		
     }
