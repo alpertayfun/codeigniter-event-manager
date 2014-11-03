@@ -50,7 +50,7 @@ class Events {
     	Register::Instance(get_instance());
     	
 		// Magic methoda gelen istekleri kontrol ediyoruz.
-		if($name == 'add' || $name == 'fire'){
+		if($name == 'add' || $name == 'fire' || $name == 'has' || $name == 'remove'){
 			$argument1 = isset($arguments[0]) ? $arguments[0] : false;
 			$argument2 = isset($arguments[1]) ? $arguments[1] : null;
 			
