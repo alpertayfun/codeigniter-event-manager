@@ -36,27 +36,41 @@
  */
  
 
-// event'ları kayıt edecek static 
-// kütüphanemizi dahil ediyoruz.
+ // We will process the event are included in the library
 require_once('register.class.php');
 
-// Tanımlanan event'ler
+// defined events
 require_once('defined.php');
 
 class Events {
+	/**
+	 * access the CI environment
+	 *
+	 * @return no return
+	 */
 	public static function __callStatic($name, $arguments)
     {
-    	// codeigniter ortam değişkenini alıp register class'ına inject ediyoruz
-    	Register::Instance(get_instance());
+    	// receive CI environment variable and send to the register class
+    	Register::Instance(self::_envInstance());
     	
-		// Magic methoda gelen istekleri kontrol ediyoruz.
+		// usable methods
 		if($name == 'add' || $name == 'fire' || $name == 'has' || $name == 'remove'){
 			$argument1 = isset($arguments[0]) ? $arguments[0] : false;
 			$argument2 = isset($arguments[1]) ? $arguments[1] : null;
+			$argument3 = isset($arguments[2]) ? $arguments[2] : null;
 			
-			// Gelen isteği register class'sımıza gönderiyoruz
-    		return Register::$name($argument1, $argument2);
+			// send to the register class of incoming requests
+    		return Register::$name($argument1, $argument2, $argument3);
 		}
-		
     }
+	
+	/**
+	 * access the CI environment
+	 *
+	 * @return no return
+	 */
+	private static function _envInstance()
+	{
+		return $ci =& get_instance();
+	}
 }
